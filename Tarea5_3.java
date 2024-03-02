@@ -1,13 +1,7 @@
-public class Fecha {
+class Fecha {
     private int dia;
     private int mes;
-    private int año;
-
-    public Fecha(int dia, int mes, int año) {
-        this.dia = dia;
-        this.mes = mes;
-        this.año = año;
-    }
+    private int anio;
 
     public int getDia() {
         return dia;
@@ -25,50 +19,36 @@ public class Fecha {
         this.mes = mes;
     }
 
-    public int getAño() {
-        return año;
+    public int getAnio() {
+        return anio;
     }
 
-    public void setAño(int año) {
-        this.año = año;
+    public void setAnio(int anio) {
+        this.anio = anio;
     }
 
     public void mostrarFecha() {
-        System.out.println(dia + " de " + obtenerNombreMes(mes) + " de " + año);
-    }
-
-    private String obtenerNombreMes(int mes) {
-        switch (mes) {
-            case 1:
-                return "enero";
-            case 2:
-                return "febrero";
-            case 3:
-                return "marzo";
-            case 4:
-                return "abril";
-            case 5:
-                return "mayo";
-            case 6:
-                return "junio";
-            case 7:
-                return "julio";
-            case 8:
-                return "agosto";
-            case 9:
-                return "septiembre";
-            case 10:
-                return "octubre";
-            case 11:
-                return "noviembre";
-            case 12:
-                return "diciembre";
-            default:
-                return "mes inválido";
-        }
+        String[] nombresMeses = {"enero", "febrero", "marzo", "abril", "mayo", "junio",
+                                 "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"};
+        System.out.println(dia + " de " + nombresMeses[mes - 1] + " de " + anio);
     }
 
     public String toString() {
-        return dia + "/" + mes + "/" + año;
+        return dia + " de " + mes + " de " + anio;
+    }
+}
+
+public class Tarea5_3 {
+    public static void main(String[] args) {
+        Fecha fecha = new Fecha();
+
+        fecha.setDia(1);
+        fecha.setMes(3);
+        fecha.setAnio(2022);
+
+        System.out.print("Fecha utilizando mostrarFecha(): ");
+        fecha.mostrarFecha();
+
+        System.out.println("Fecha utilizando toString(): " + fecha.toString());
     }
 }

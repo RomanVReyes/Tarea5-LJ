@@ -1,33 +1,8 @@
-public class Monedero {
+class MonederoDolares {
     private int centavo1;
     private int centavo5;
     private int centavo10;
     private int centavo25;
-
-    public Monedero(int centavo1, int centavo5, int centavo10, int centavo25) {
-        this.centavo1 = centavo1;
-        this.centavo5 = centavo5;
-        this.centavo10 = centavo10;
-        this.centavo25 = centavo25;
-    }
-
-    public void depositar(int uno, int cinco, int diez, int veinticinco) {
-        this.centavo1 += uno;
-        this.centavo5 += cinco;
-        this.centavo10 += diez;
-        this.centavo25 += veinticinco;
-    }
-
-    public void retirar(int uno, int cinco, int diez, int veinticinco) {
-        this.centavo1 -= uno;
-        this.centavo5 -= cinco;
-        this.centavo10 -= diez;
-        this.centavo25 -= veinticinco;
-    }
-
-    public double total() {
-        return (centavo1 + 5 * centavo5 + 10 * centavo10 + 25 * centavo25) / 100.0;
-    }
 
     public int getCentavo1() {
         return centavo1;
@@ -61,7 +36,47 @@ public class Monedero {
         this.centavo25 = centavo25;
     }
 
+    public void depositar(int uno, int cinco, int diez, int veinticinco) {
+        setCentavo1(getCentavo1() + uno);
+        setCentavo5(getCentavo5() + cinco);
+        setCentavo10(getCentavo10() + diez);
+        setCentavo25(getCentavo25() + veinticinco);
+    }
+
+    public void retirar(int uno, int cinco, int diez, int veinticinco) {
+        if (getCentavo1() >= uno && getCentavo5() >= cinco && getCentavo10() >= diez && getCentavo25() >= veinticinco) {
+            setCentavo1(getCentavo1() - uno);
+            setCentavo5(getCentavo5() - cinco);
+            setCentavo10(getCentavo10() - diez);
+            setCentavo25(getCentavo25() - veinticinco);
+        } else {
+            System.out.println("No hay suficientes monedas para retirar.");
+        }
+    }
+
+    public double total() {
+        double totalCentavos = getCentavo1() + getCentavo5() * 5 + getCentavo10() * 10 + getCentavo25() * 25;
+        return totalCentavos / 100;
+    }
+
     public String toString() {
-        return "Monedero [1c=" + centavo1 + ", 5c=" + centavo5 + ", 10c=" + centavo10 + ", 25c=" + centavo25 + "]";
+        return "Monedero:" + "\n" +
+                "centavo1: " + getCentavo1() + "\n" +
+                "centavo5: " + getCentavo5() + "\n" +
+                "centavo10: " + getCentavo10() + "\n" +
+                "centavo25: " + getCentavo25();
+    }
+}
+
+public class Tarea5_2 {
+    public static void main(String[] args) {
+        MonederoDolares monedero = new MonederoDolares();
+        monedero.depositar(10, 5, 3, 2);
+        System.out.println("Estado inicial del monedero:");
+        System.out.println(monedero);
+        monedero.retirar(2, 1, 0, 1);
+        System.out.println("\nEstado del monedero después de retirar monedas:");
+        System.out.println(monedero);
+        System.out.println("\nTotal en el monedero: $" + monedero.total());
     }
 }
